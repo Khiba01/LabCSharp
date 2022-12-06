@@ -14,38 +14,27 @@ namespace Properties
         private string[] names;
 
         // TODO improve
-        public IList<string> GetSeeds()
+        public IList<string> Seeds
         {
-            return this.seeds.ToList();
+            get { return this.seeds.ToList(); }
+            set { this.seeds = seeds.ToArray(); }
+        } 
+
+        // TODO improve
+        public IList<string> Names 
+        {
+            get { return this.names.ToList(); }
+            set { this.names = names.ToArray(); }
         }
 
         // TODO improve
-        public void SetSeeds(IList<string> seeds)
-        {
-            this.seeds = seeds.ToArray();
-        }
-
-        // TODO improve
-        public IList<string> GetNames()
-        {
-            return this.names.ToList();
-        }
-
-        // TODO improve
-        public void SetNames(IList<string> names)
-        {
-            this.names = names.ToArray();
-        }
-
-        // TODO improve
-        public int GetDeckSize()
-        {
-            return this.names.Length * this.seeds.Length;
-        }
-
+        public int GetDeckSize => this.names.Length * this.seeds.Length;
+        
         /// TODO improve
-        public ISet<Card> GetDeck()
+        public ISet<Card> Deck
         {
+            get 
+            {
             if (this.names == null || this.seeds == null)
             {
                 throw new InvalidOperationException();
@@ -60,6 +49,7 @@ namespace Properties
                         (n, s) => Tuple.Create(this.names[n], this.seeds[s], n)))
                 .Select(tuple => new Card(tuple))
                 .ToList());
+            }
         }
     }
 }
